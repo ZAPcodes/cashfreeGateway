@@ -1,19 +1,22 @@
 import express from 'express';
 import cors from 'cors';
 import crypto from 'crypto';
-import path  from 'path';
-import {
-    Cashfree
-} from 'cashfree-pg';
+import path from "path"; 
+import { fileURLToPath } from "url"; 
+import {Cashfree} from 'cashfree-pg';
 import dotenv from 'dotenv'
+
 dotenv.config();
 
 const app = express();
 
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Serve static files from the "dist" folder
-app.use(express.static(path.join(__dirname, 'dist')));
+// Serve static files from the dist folder
+app.use(express.static(path.join(__dirname, "dist")));
+
 
 // Catch-all route to handle SPA (Single Page Application) routing
 app.get('*', (req, res) => {
