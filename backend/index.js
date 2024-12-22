@@ -2,8 +2,15 @@ import express from 'express';
 import cors from 'cors';
 import crypto from 'crypto';
 import path  from 'path';
+import {
+    Cashfree
+} from 'cashfree-pg';
+import dotenv from 'dotenv'
+dotenv.config();
 
-app.use(cors());
+const app = express();
+
+
 
 // Serve static files from the "dist" folder
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -13,15 +20,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-import {
-    Cashfree
-} from 'cashfree-pg';
 
-
-import dotenv from 'dotenv'
-dotenv.config();
-
-const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({
