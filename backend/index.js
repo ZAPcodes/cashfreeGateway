@@ -1,6 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import crypto from 'crypto';
+const path = require('path');
+
+app.use(cors());
+
+// Serve static files from the "dist" folder
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to handle SPA (Single Page Application) routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 import {
     Cashfree
 } from 'cashfree-pg';
@@ -35,12 +47,8 @@ function generateOrderId() {
 }
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-})
 
-
-app.get('/payment', async (req, res) => {
+app.get('/api/payment', async (req, res) => {
 
     try {
 
@@ -72,7 +80,7 @@ app.get('/payment', async (req, res) => {
 
 })
 
-app.post('/verify', async (req, res) => {
+app.post('/api/verify', async (req, res) => {
 
     try {
 
