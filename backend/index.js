@@ -32,7 +32,7 @@ function generateOrderId() {
 
     const orderId = hash.digest('hex');
 
-    return orderId.substr(0, 12);
+    return orderId.substring(0, 12);
 }
 
 
