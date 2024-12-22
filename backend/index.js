@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import crypto from 'crypto';
-const path = require('path');
+import path  from 'path';
 
 app.use(cors());
 
