@@ -9,22 +9,9 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 const app = express();
-
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serve static files from the dist folder
-app.use(express.static(path.join(__dirname, "dist")));
-
-
-// Catch-all route to handle SPA (Single Page Application) routing
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-
 app.use(cors());
+
+
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
@@ -57,8 +44,8 @@ app.get('/api/payment', async (req, res) => {
         let request = {
             "order_amount": 1.00,
             "order_currency": "INR",
-            "order_id": await generateOrderId(),
-            "customer_details": {
+            "order_id": generateOrderId(),
+            customer_details: {
                 "customer_id": "webcodder01",
                 "customer_phone": "9999999999",
                 "customer_name": "Web Codder",
