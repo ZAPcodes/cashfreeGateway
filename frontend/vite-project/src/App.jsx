@@ -7,14 +7,14 @@ function App() {
   let cashfree; 
   let insitialzeSDK = async function () {
     cashfree = await load({
-      mode: "sandbox",
+      mode: "PRODUCTION",
     })
   }
   insitialzeSDK()
   const [orderId, setOrderId] = useState("")
   const getSessionId = async () => {
     try {
-      let res = await axios.get("https://cashfreegateway.onrender.com/api/payment")
+      let res = await axios.get("http://localhost:8000/api/payment")
       if (res.data && res.data.payment_session_id) {
         console.log(res.data)
         setOrderId(res.data.order_id)
@@ -26,7 +26,7 @@ function App() {
   }
   const verifyPayment = async () => {
     try {
-      let res = await axios.post("https://cashfreegateway.onrender.com/api/verify", {
+      let res = await axios.post("http://localhost:8000/api/verify", {
         orderId: orderId
       })
       if (res && res.data) {
@@ -53,7 +53,7 @@ function App() {
     }
   }
   return (
-    <><h1>Cashfree payment getway</h1>
+    <><h1>Cashfree payment gateway</h1>
       <div className="card">
         <button onClick={handleClick}>
           Pay now
