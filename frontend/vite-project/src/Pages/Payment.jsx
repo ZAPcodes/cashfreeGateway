@@ -28,7 +28,8 @@ function Payment() {
       let res = await axios.post("https://cashfreegateway.onrender.com/api/verify", {
         orderId: orderId
       })
-      if (res.data.order_status=="PAID") {
+      console.log(res.data)
+      if (res.data.order_status==="PAID") {
         alert("payment verified")
       }
       else{
