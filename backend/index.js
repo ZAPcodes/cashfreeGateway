@@ -1,8 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import crypto from 'crypto';
-import path from "path"; 
-import { fileURLToPath } from "url"; 
 import {Cashfree} from 'cashfree-pg';
 import dotenv from 'dotenv'
 
@@ -21,7 +19,7 @@ app.use(express.urlencoded({
 
 Cashfree.XClientId = process.env.CLIENT_ID;
 Cashfree.XClientSecret = process.env.CLIENT_SECRET;
-Cashfree.XEnvironment = Cashfree.Environment.PRODUCTION;
+Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 
 
 function generateOrderId() {
@@ -47,13 +45,13 @@ app.get('/api/payment', async (req, res) => {
             "order_id": await generateOrderId(),
             customer_details: {
                 "customer_id": "webcodder01",
-                "customer_phone": "8809795723",
+                "customer_phone": "8809795765",
                 "customer_name": "Abhinav",
                 "customer_email": "zap@example.com"
             },
         }
 
-        Cashfree.PGCreateOrder("2023-08-01", request).then(response => {
+        Cashfree.PGCreateOrder("2025-01-01", request).then(response => {
             console.log(response.data);
             res.json(response.data);
 
@@ -77,7 +75,7 @@ app.post('/api/verify', async (req, res) => {
             orderId
         } = req.body;
 
-        Cashfree.PGFetchOrder("2023-08-01", orderId).then((response) => {
+        Cashfree.PGFetchOrder("2025-01-01", orderId).then((response) => {
 
             res.json(response.data);
         }).catch(error => {
